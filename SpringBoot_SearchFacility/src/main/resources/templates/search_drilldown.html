@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html lang="en-US" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title th:text="#{searchDrill.title}"></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+           
+        
+        <!-- new -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+            
+        <script type="text/javascript" th:src="@{../assets/javascript/data_tables.js}"></script>
+        <script type="text/javascript" th:src="@{../assets/javascript/table_click.js}"></script>
+        <script type="text/javascript" th:src="@{../assets/javascript/search_drilldown.js}"></script>
+        
+        <link rel="stylesheet" type="text/css" th:href="@{https://cdn.datatables.net/1.10.23/css/jquery.dataTables.css}"/>
+        <script type="text/javascript" charset="utf8" th:src="@{https://cdn.datatables.net/1.10.23/js/jquery.dataTables.js}"></script>
+    </head>
+  
+    <body>
+        <section id="cover" class="min-vh-100">
+            <div id="cover-caption">
+                <div class="container">
+                    <div class="row text-black-50">            
+                        <div class="col-xl-5 col-lg-6 col-md-8 col-sm-10 mx-auto text-center form p-4">
+                            <h1 class="display-4 py-2" th:text="#{searchDrill.h1}"></h1>
+                            <div class="px-2">
+                                <hr>
+                                <div class="card" th:each="item: ${model.vacc}">
+                                    <div class="card-body">
+                                      <h4 class="card-title" th:text="${item.country}"></h4>
+                                      <p class="card-text"  th:text="#{searchDrill.p}"></p>
+                                    </div>
+                                    <ul class="list-group list-group-flush">
+                                        <li class="list-group-item"><b th:text="#{searchDrill.li.id}"></b></br> <span th:text="${item.id}" th:remove="tag"></span></li>
+                                        <li class="list-group-item"><b th:text="#{searchDrill.li.dVacc}"></b></br> <span th:text="${item.daily_vaccinations}" th:remove="tag"></span></li>
+                                        <li class="list-group-item"><b th:text="#{searchDrill.li.dVaccPM}"></b></br> <span th:text="${item.daily_vaccinations_per_million}" th:remove="tag"></span></li>
+                                        <li class="list-group-item"><b th:text="#{searchDrill.li.iso}"></b></br> <span th:text="${item.iso_code}" th:remove="tag"></span></li>
+                                        <li class="list-group-item"><b th:text="#{searchDrill.li.pepFullVacc}"></b></br> <span th:text="${item.people_fully_vaccinated}" th:remove="tag"></span></li>
+                                        <li class="list-group-item"><b th:text="#{searchDrill.li.pepFullVaccPH}"></b></br> <span th:text="${item.people_fully_vaccinated_per_hundred}" th:remove="tag"></span></li>
+                                        <li class="list-group-item"><b th:text="#{searchDrill.li.pepVacc}"></b></br> <span th:text="${item.people_vaccinated}" th:remove="tag"></span></li>
+                                        <li class="list-group-item"><b th:text="#{searchDrill.li.pepVaccPH}"></b></br> <span th:text="${item.people_vaccinated_per_hundred}" th:remove="tag"></span></li>
+                                        <li class="list-group-item"><b th:text="#{searchDrill.li.sourceName}"></b></br> <span th:text="${item.source_name}" th:remove="tag"></span></li>
+                                        <li class="list-group-item"><b th:text="#{searchDrill.li.sourceWeb}"></b></br> <span th:text="${item.source_website}" th:remove="tag"></span></li>
+                                        <li class="list-group-item"><b th:text="#{searchDrill.li.totalVacc}"></b></br> <span th:text="${item.total_vaccinations}" th:remove="tag"></span></li>
+                                        <li class="list-group-item"><b th:text="#{searchDrill.li.totalVaccPH}"></b></br> <span th:text="${item.total_vaccinations_per_hundred}" th:remove="tag"></span></li>
+                                        <li class="list-group-item"><b th:text="#{searchDrill.li.vaccDate}"></b></br> <span th:text="${item.v_date}" th:remove="tag"></span></li>
+                                        </li>
+                                    </ul>
+                                </div>
+                                </c:forEach>
+                                <br>
+                                <hr>
+                                <br>
+                                <b><h2 th:text="#{searchDrill.vacc.h2}"></h2></b>
+                                <p class="card-text" th:text="#{searchDrill.vacc.p}"></p>
+                                <br>
+                                <hr>
+                                    <div class="card" th:each="item: ${model.vaccines}">
+                                        <img class="card-img-top" th:src="@{${'../assets/images/' + item.id + '.jpg'}}" alt="Card image cap">
+                                    <div class="card-body">
+                                        <h4 class="card-title" th:text="${item.vaccine}"></h4>
+                                    </div>
+                                        <ul class="list-group list-group-flush">
+                                            <li class="list-group-item"><b th:text="#{searchDrill.vacc.li.id}"></b></br> 
+                                                <span th:text="${item.id}" th:remove="tag"></span></li>
+                                            <li class="list-group-item"><b th:text="#{searchDrill.vacc.li.name}"></b></br> 
+                                                <span th:text="${item.vaccine}" th:remove="tag"></span></li>
+                                            <li class="list-group-item"><b th:text="#{searchDrill.vacc.li.costPDose}"></b></br> 
+                                                <span th:text="${item.cost_per_dose}" th:remove="tag"></span></li>
+                                            <li class="list-group-item"><b th:text="#{searchDrill.vacc.li.eff}"></b></br> 
+                                                <span th:text="${item.efficacy}" th:remove="tag"></span></li>
+                                        </ul>
+                                </div>
+                                </c:forEach>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+        </section>
+    </body>
+</html>
